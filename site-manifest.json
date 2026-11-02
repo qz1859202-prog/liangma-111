@@ -8,12 +8,12 @@
       "sha256": "a7b578046641a122957317c7bac6c3a18de24630c2bbc21cce3773e2b96297c9"
     },
     {
-      "path": "assets/index-Cto1KTBH.css",
-      "sha256": "2b6bc58ebddd03417f1550f757eb3742e37c09fb1fc48ec093d4f3957dbc1ddf"
+      "path": "assets/index-Bs_OJE1X.css",
+      "sha256": "5e45246e3a2a616100aeb35d77a661eaa6a6aea1eefcbf0f62eb2edce97cb95a"
     },
     {
-      "path": "assets/index-Df2bLsm4.js",
-      "sha256": "a69390af443e0e906931b1f1eac397db073779cf60093081ebb169a637133fb3"
+      "path": "assets/index-D2BeBOQv.js",
+      "sha256": "03c6689875a9932e3b2712dbd974f736f8031df809e157bbe4e8a954d336c57b"
     },
     {
       "path": "brand/quantum-twins-black.png",
@@ -925,11 +925,15 @@
     },
     {
       "path": "fonts/inter-latin.woff2",
-      "sha256": "3be7168f4fe45b94d121a35ed30f6e99d2f92a8582da1650b5b5ca14442125f3"
+      "sha256": "f26401c266ab48790369ddb2ba7e99fd247e81a13b3f1f5eef3b991875451e9c"
     },
     {
       "path": "fonts/inter-semibold.woff2",
-      "sha256": "f71b6cc395138621140cc200ad54c8ca7aef227dcd94aeebb01fc67985a7d590"
+      "sha256": "5ada7121813cdafcd2755f36043601648a07caa2bac8122ee13483fa2639b14f"
+    },
+    {
+      "path": "fonts/noto-sc-interface.woff2",
+      "sha256": "86a8ac67dcd58de0bd906e517e85eb10e055109c12de5f7a104d0e90b06d50a2"
     },
     {
       "path": "fonts/noto-sc-site.woff2",
@@ -937,7 +941,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "1d71d62944ad36d8a244d705f6dc2f4eff220d1dbf56dc48168620316cb0db9d"
+      "sha256": "a05ab815242beb9e49cee63eda2be8220591c34071b6093c36f5aebcbdb19e31"
     },
     {
       "path": "media/chinese-scroll.webp",
