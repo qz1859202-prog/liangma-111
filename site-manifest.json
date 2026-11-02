@@ -8,12 +8,20 @@
       "sha256": "a7b578046641a122957317c7bac6c3a18de24630c2bbc21cce3773e2b96297c9"
     },
     {
-      "path": "assets/index-D8gEuAnC.js",
-      "sha256": "5b0259c672e7d597c5799f0c97a59aab03d4530063fdf243d250337e5239f013"
+      "path": "assets/index-Cto1KTBH.css",
+      "sha256": "2b6bc58ebddd03417f1550f757eb3742e37c09fb1fc48ec093d4f3957dbc1ddf"
     },
     {
-      "path": "assets/index-G0TjSrEn.css",
-      "sha256": "4e3f739233ae329b50deebd4c0820a2b21efb1748612adc51857b99843feb3c4"
+      "path": "assets/index-Df2bLsm4.js",
+      "sha256": "a69390af443e0e906931b1f1eac397db073779cf60093081ebb169a637133fb3"
+    },
+    {
+      "path": "brand/quantum-twins-black.png",
+      "sha256": "ea4c018c68836eb09348daa143e70cc0a2b8eff2e9c3407010a8a0774ce66904"
+    },
+    {
+      "path": "brand/quantum-twins-color.png",
+      "sha256": "fe5bef6411a1f57e8c79fb08962487c0f272b80005da1e48b47c15ab1e65c67c"
     },
     {
       "path": "favicon.svg",
@@ -888,16 +896,48 @@
       "sha256": "dfdc426c0a6c9260b26399e58281525b6c7bb6c77d4c2b6864432ddfd077e52c"
     },
     {
+      "path": "fonts/Cormorant-OFL.txt",
+      "sha256": "60700d351cac4650c51f3f9db318d2a420f8b45052dba2715eb5fec41f0f6956"
+    },
+    {
+      "path": "fonts/Inter-OFL.txt",
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    {
+      "path": "fonts/NotoSC-OFL.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
       "path": "fonts/body.woff2",
       "sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d"
+    },
+    {
+      "path": "fonts/cormorant-italic.woff2",
+      "sha256": "30e8d0d5c24de630da98b44b1f0370d8aa8e465e341335f49c4ada64e7e27c24"
+    },
+    {
+      "path": "fonts/cormorant-regular.woff2",
+      "sha256": "900e4250d2ba5f1494883f897740b8f523e8d1fcc6c14ee0a8a12aa849a213d6"
     },
     {
       "path": "fonts/display.woff2",
       "sha256": "25f33e61cf995abd6be62931cf03bf427286259177b43618cc410ee0157cfd30"
     },
     {
+      "path": "fonts/inter-latin.woff2",
+      "sha256": "3be7168f4fe45b94d121a35ed30f6e99d2f92a8582da1650b5b5ca14442125f3"
+    },
+    {
+      "path": "fonts/inter-semibold.woff2",
+      "sha256": "f71b6cc395138621140cc200ad54c8ca7aef227dcd94aeebb01fc67985a7d590"
+    },
+    {
+      "path": "fonts/noto-sc-site.woff2",
+      "sha256": "dad4f5b84e3fdbc43bf9e0e17f2c9bfa8b2e3c004e9806a1f0a0452e9d667f0a"
+    },
+    {
       "path": "index.html",
-      "sha256": "3f4c596baedc5ab5d68309fe40f10bc0ee277ccb81283e316359a3af68b02102"
+      "sha256": "1d71d62944ad36d8a244d705f6dc2f4eff220d1dbf56dc48168620316cb0db9d"
     },
     {
       "path": "media/chinese-scroll.webp",
