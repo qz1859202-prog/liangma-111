@@ -8,12 +8,12 @@
       "sha256": "a7b578046641a122957317c7bac6c3a18de24630c2bbc21cce3773e2b96297c9"
     },
     {
-      "path": "assets/index-CbXv6Ks_.css",
-      "sha256": "ded0afa26c5acaba1f8b105e7055a47669ddc1654467c34d22a3f48891cc67d1"
+      "path": "assets/index-CDWZrTdR.css",
+      "sha256": "ba6e7a252db3737792e619637dbe41364bf4c9c860e1c937355fd2d19b3ad872"
     },
     {
-      "path": "assets/index-fMFofe9w.js",
-      "sha256": "7e8a44f8bda5fec163a31bc4a0f5365b06c9c69b8380dcc3500625c6cb530313"
+      "path": "assets/index-FxqI73jt.js",
+      "sha256": "8867e4be4f01c15fe54690b8adf532950203fffa7e8c478020acfd3b993848ff"
     },
     {
       "path": "brand/quantum-twins-black.png",
@@ -900,12 +900,28 @@
       "sha256": "60700d351cac4650c51f3f9db318d2a420f8b45052dba2715eb5fec41f0f6956"
     },
     {
+      "path": "fonts/FONT-NOTICES.txt",
+      "sha256": "464f01901f70552828272d653433959eb3265206f9ce5aa2befbcac689688f94"
+    },
+    {
       "path": "fonts/Inter-OFL.txt",
       "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
     },
     {
       "path": "fonts/NotoSC-OFL.txt",
       "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "fonts/Poppins-OFL.txt",
+      "sha256": "6be04893d770899a015649c7aa3b582f871b272f8747a92b78b17c3e5c8b2573"
+    },
+    {
+      "path": "fonts/Smiley-OFL.txt",
+      "sha256": "9401f4050f1b66c26b6ccdc8b0e14a3c1cc37aac122eda84386f25854a9bec72"
+    },
+    {
+      "path": "fonts/SourceHan-OFL.txt",
+      "sha256": "fcac737e761ec63dbfbdce11030a1780161920d80315edba9c8beff1c2bac5a2"
     },
     {
       "path": "fonts/body.woff2",
@@ -940,8 +956,24 @@
       "sha256": "dad4f5b84e3fdbc43bf9e0e17f2c9bfa8b2e3c004e9806a1f0a0452e9d667f0a"
     },
     {
+      "path": "fonts/poppins-medium.woff2",
+      "sha256": "5f643a0c75904d2da3585c2d03872b0e9749e2460300af20fe7f9c0294e55aae"
+    },
+    {
+      "path": "fonts/poppins-regular.woff2",
+      "sha256": "360a7776a572195fe15f395d7733a8cd7418c70fe22fe5b6a034b050826a7ff5"
+    },
+    {
+      "path": "fonts/smiley-display.woff2",
+      "sha256": "b788c467708170544b57cb1239e8d97adf51dbdb3237853e7061a91dfbc6465f"
+    },
+    {
+      "path": "fonts/source-han-interface.woff2",
+      "sha256": "9ca4571bad0800172e81e932f552c93e7ec4bfc6bb2d219efa947b47198d9a71"
+    },
+    {
       "path": "index.html",
-      "sha256": "c277fab9748705ef67515c9708eb8ead0d4cf3722b037c87af700b6190de7805"
+      "sha256": "2d95f2049228591101e9123eb3644057b8ee6f6cac3a28531fb91204ef1d837c"
     },
     {
       "path": "media/chinese-scroll.webp",
