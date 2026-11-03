@@ -2,10 +2,10 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import hashlib,json,re,time,urllib.request
 manifest=json.loads(Path('site-manifest.json').read_text())
-assert hashlib.sha256(json.dumps(manifest,sort_keys=True,separators=(',',':')).encode()).hexdigest()=='979b10c86baad73211051ebbf46336333a4a56d6ab332a9357eaf8837f4f736d', 'Await matching 111 manifest revision'
+assert hashlib.sha256(json.dumps(manifest,sort_keys=True,separators=(',',':')).encode()).hexdigest()=='6d5b6a393601338dfc9fecd11c85d650d0f3784e5da17af33c11e7e8234bc4fb', 'Await matching 111 manifest revision'
 root=Path('_site');root.mkdir(exist_ok=True)
-INDEX_HTML = '<!doctype html>\n<html lang="zh-CN" class="dark">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width,initial-scale=1" />\n  <meta name="theme-color" content="#10110F" />\n  <meta name="description" content="量孖 — 南京量孖文化科技有限公司。艺术、生成影像与视觉表达，让想象的每一种可能被看见。" />\n  <title>量孖 LIANGMA — Imagination, in motion.</title>\n  <link rel="icon" href="/liangma-111/favicon.svg" type="image/svg+xml" />\n  <link rel="preload" href="/liangma-111/fonts/poppins-regular.woff2" as="font" type="font/woff2" crossorigin />\n  <link rel="preload" href="/liangma-111/media/water.webp" as="image" />\n  <script type="module" crossorigin src="/liangma-111/assets/index-BovGp19t.js"></script>\n  <link rel="stylesheet" crossorigin href="/liangma-111/assets/index-BgYjBhBF.css">\n</head>\n<body><div id="root"></div></body>\n</html>\n'
-assert hashlib.sha256(INDEX_HTML.encode('utf-8')).hexdigest()=='febff5db7ddaff0ce2251e43a4c399caab32efd9aaf427a0bdc628df82679b1e'
+INDEX_HTML = '<!doctype html>\n<html lang="zh-CN" class="dark">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width,initial-scale=1" />\n  <meta name="theme-color" content="#10110F" />\n  <meta name="description" content="量孖 — 南京量孖文化科技有限公司。艺术、生成影像与视觉表达，让想象的每一种可能被看见。" />\n  <title>量孖 LIANGMA — Make the unseen visible.</title>\n  <link rel="icon" href="/liangma-111/favicon.svg" type="image/svg+xml" />\n  <link rel="preload" href="/liangma-111/fonts/poppins-regular.woff2" as="font" type="font/woff2" crossorigin />\n  <link rel="preload" href="/liangma-111/media/water.webp" as="image" />\n  <script type="module" crossorigin src="/liangma-111/assets/index-3LS-6aNF.js"></script>\n  <link rel="stylesheet" crossorigin href="/liangma-111/assets/index-CgwCHqok.css">\n</head>\n<body><div id="root"></div></body>\n</html>\n'
+assert hashlib.sha256(INDEX_HTML.encode('utf-8')).hexdigest()=='ce8fb98b79bb2023b4377855ea3682ee178836c203ca179f1e193f05f5d36b09'
 (root/'index.html').write_text(INDEX_HTML,encoding='utf-8')
 def fetch(item):
  if item['path']=='index.html':return
