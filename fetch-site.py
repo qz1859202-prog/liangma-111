@@ -1,31 +1,70 @@
 from concurrent.futures import ThreadPoolExecutor
-from pathlib import Path
-import hashlib,json,re,time,urllib.request
-manifest=json.loads(Path('site-manifest.json').read_text())
-assert hashlib.sha256(json.dumps(manifest,sort_keys=True,separators=(',',':')).encode()).hexdigest()=='6d5b6a393601338dfc9fecd11c85d650d0f3784e5da17af33c11e7e8234bc4fb', 'Await matching 111 manifest revision'
-root=Path('_site');root.mkdir(exist_ok=True)
-INDEX_HTML = '<!doctype html>\n<html lang="zh-CN" class="dark">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width,initial-scale=1" />\n  <meta name="theme-color" content="#10110F" />\n  <meta name="description" content="量孖 — 南京量孖文化科技有限公司。艺术、生成影像与视觉表达，让想象的每一种可能被看见。" />\n  <title>量孖 LIANGMA — Make the unseen visible.</title>\n  <link rel="icon" href="/liangma-111/favicon.svg" type="image/svg+xml" />\n  <link rel="preload" href="/liangma-111/fonts/poppins-regular.woff2" as="font" type="font/woff2" crossorigin />\n  <link rel="preload" href="/liangma-111/media/water.webp" as="image" />\n  <script type="module" crossorigin src="/liangma-111/assets/index-3LS-6aNF.js"></script>\n  <link rel="stylesheet" crossorigin href="/liangma-111/assets/index-CgwCHqok.css">\n</head>\n<body><div id="root"></div></body>\n</html>\n'
-assert hashlib.sha256(INDEX_HTML.encode('utf-8')).hexdigest()=='ce8fb98b79bb2023b4377855ea3682ee178836c203ca179f1e193f05f5d36b09'
-(root/'index.html').write_text(INDEX_HTML,encoding='utf-8')
+from pathlib import Path, PurePosixPath
+from urllib.parse import quote
+import hashlib,json,stat,time,urllib.request,zipfile
+
+def sha(data):
+ return hashlib.sha256(data).hexdigest()
+
+def safe_path(value):
+ p=PurePosixPath(value)
+ assert value and not p.is_absolute() and '..' not in p.parts and p.as_posix()==value and '\\' not in value, 'Unsafe asset path'
+ return value
+
+raw=Path('site-manifest.json').read_bytes()
+assert sha(raw)=='4b91b2a65da3a9f22e50f4c57fb3fd2a2c4a63a9cf40235285aed057aa098d19', 'Manifest does not match this release'
+manifest=json.loads(raw)
+archive=Path('site-code.zip')
+assert sha(archive.read_bytes())==manifest['code_sha256'], 'Code archive mismatch'
+root=Path('_site')
+assert not root.is_symlink(), 'Unsafe output directory'
+root.mkdir(exist_ok=True)
+expected={safe_path(i['path']):i for i in manifest['files']}
+assert len(expected)==len(manifest['files']), 'Duplicate asset paths'
+with zipfile.ZipFile(archive) as bundle:
+ seen=set()
+ for item in bundle.infolist():
+  name=safe_path(item.filename)
+  assert not item.is_dir() and name in expected and 'origin' not in expected[name], 'Unexpected code entry'
+  assert name not in seen and not stat.S_ISLNK(item.external_attr>>16), 'Unsafe archive entry'
+  seen.add(name)
+  data=bundle.read(item)
+  spec=expected[name]
+  assert len(data)==spec['bytes'] and sha(data)==spec['sha256'], 'Code checksum mismatch: '+name
+  target=root/name
+  assert target.resolve().is_relative_to(root.resolve()), 'Unsafe code output path'
+  target.parent.mkdir(parents=True,exist_ok=True)
+  target.write_bytes(data)
+ assert seen=={name for name,i in expected.items() if 'origin' not in i}, 'Missing code files'
+
 def fetch(item):
- if item['path']=='index.html':return
- target=root/item['path'];target.parent.mkdir(parents=True,exist_ok=True)
- for attempt in range(4):
+ name=safe_path(item['path'])
+ origin=item['origin']
+ assert origin in ('https://qz1859202-prog.github.io/liangma-111', 'https://qz1859202-prog.github.io/liangma-444'), 'Unexpected asset origin'
+ target=root/name
+ assert target.resolve().is_relative_to(root.resolve()), 'Unsafe remote output path'
+ target.parent.mkdir(parents=True,exist_ok=True)
+ for attempt in range(5):
   try:
-   request=urllib.request.Request(manifest['source_origin']+'/'+item['path'],headers={'User-Agent':'Liangma-Pages-Migration/1.0'})
-   with urllib.request.urlopen(request,timeout=90) as response:data=response.read()
-   if hashlib.sha256(data).hexdigest()!=item['sha256']:raise ValueError('Checksum mismatch: '+item['path'])
-   if target.suffix in ['.html','.js','.css','.json','.webmanifest','.svg']:
-    text=data.decode('utf-8')
-    text=re.sub(r'(?<![\w:/-])/(assets|films|media|fonts|images|artworks|icons|paintings|brand)/',lambda m:'/'+manifest['repository']+'/'+m.group(1)+'/',text)
-    text=text.replace('href="/favicon.svg"','href="/'+manifest['repository']+'/favicon.svg"')
-    data=text.encode('utf-8')
+   req=urllib.request.Request(origin+'/'+quote(name,safe='/'),headers={'User-Agent':'Liangma-Pages-Release/2.0'})
+   with urllib.request.urlopen(req,timeout=90) as response:data=response.read()
+   assert len(data)==item['bytes'] and sha(data)==item['sha256'], 'Asset checksum mismatch: '+name
    target.write_bytes(data)
    return
   except Exception:
-   if attempt==3:raise
+   if attempt==4:raise
    time.sleep(2**attempt)
-with ThreadPoolExecutor(max_workers=6) as pool:list(pool.map(fetch,manifest['files']))
+
+remote=[i for i in manifest['files'] if 'origin' in i]
+with ThreadPoolExecutor(max_workers=6) as pool:list(pool.map(fetch,remote))
 (root/'.nojekyll').touch()
-assert len(list(root.glob('films/*/index.m3u8')))==10
-print('Verified original 111 portfolio with macOS-style film windows and clean typography.')
+films=list(root.glob('films/*/index.m3u8'))
+assert len(films)==10, 'Expected 10 complete HLS films'
+for film in films:
+ for line in film.read_text().splitlines():
+  if line and not line.startswith('#'):
+   relative=safe_path(line.strip())
+   assert (film.parent/relative).is_file(), 'Missing HLS segment: '+relative
+assert len([i for i in expected if i.startswith('films/')])==217
+assert (root/'index.html').is_file()
+print('Verified '+manifest['edition']+' portfolio: '+str(len(expected))+' assets, 10 complete films, independent public Pages deployment.')
