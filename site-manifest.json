@@ -1,8 +1,8 @@
 {
-  "version": "eager-hd-20261104",
+  "version": "persistent-media-20261104",
   "edition": "111",
   "repository": "liangma-111",
-  "code_sha256": "b15cdab74526bb787bcc3ab3f254793a001c47bec8de7986a0fa0e3df872d3e9",
+  "code_sha256": "e8fc9c36d569ce192633ef2cdde26c6c802e4d34789901d25b59a072610873c7",
   "files": [
     {
       "path": ".nojekyll",
@@ -16,15 +16,14 @@
       "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
-      "path": "assets/index-C1xUnr8D.js",
-      "sha256": "a98cf4d435f566e5a8d6e371f99d17a8cccb7ed9d2c8470975cefdd7e87beede",
-      "bytes": 522556
+      "path": "assets/index-CEbIHvSb.css",
+      "sha256": "bcb96b5222707a109742dee653ddd645fe6d4b96e7a96e6cde55547c5564fb70",
+      "bytes": 172332
     },
     {
-      "path": "assets/index-DX6FFVD7.css",
-      "sha256": "f2447b1b577fdb742c9ee4952b12f53c625d82e23703a2d50eabf3a470b007e3",
-      "bytes": 172071,
-      "origin": "https://qz1859202-prog.github.io/liangma-111"
+      "path": "assets/index-DKC426qE.js",
+      "sha256": "2d98dedad9d1f8ae71c9864574c1b57791a89d9b60dde41875b60d129543898a",
+      "bytes": 522632
     },
     {
       "path": "brand/quantum-twins-black.png",
@@ -1396,8 +1395,13 @@
     },
     {
       "path": "index.html",
-      "sha256": "963b9892748a5f076db6d43c8491b5a757bde387b468d8d528c5cd08624be604",
+      "sha256": "e0cf64d87d35f8dc0c97ebdaaf4c859b124e8d116e3ea80173dc0587e3ffcc84",
       "bytes": 903
+    },
+    {
+      "path": "media-cache-sw.js",
+      "sha256": "ca5cebe1770b6d808196a5199c24f4f6df34aac3b42a081214a648a9db22b908",
+      "bytes": 5745
     },
     {
       "path": "media/chinese-scroll.webp",
