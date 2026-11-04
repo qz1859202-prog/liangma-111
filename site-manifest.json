@@ -1,8 +1,8 @@
 {
-  "version": "members-workflow-20261104",
+  "version": "mobile-video-20261104",
   "edition": "111",
   "repository": "liangma-111",
-  "code_sha256": "2b383c785410fb56e37c76eb0d0455178e43dbb06a4f7a398f626f6f28f3031e",
+  "code_sha256": "724b2edbb4c013c72e405467a40951efaa3da5bf7f91878cdfcb66521eee2f3d",
   "files": [
     {
       "path": ".nojekyll",
@@ -16,14 +16,15 @@
       "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
-      "path": "assets/index-7x4eZZVh.js",
-      "sha256": "7e3739918ab907ca51a8612b479a2ab3bdde8e1407abe1f76dd6d34bbc8d6f6b",
-      "bytes": 510078
+      "path": "assets/index-BmRv9PJ2.js",
+      "sha256": "12669affbfb3dd16311aeb65391175ce5ebdf1d84cbc45f180c66e0e10c42bce",
+      "bytes": 510153
     },
     {
       "path": "assets/index-CLUQSC7m.css",
       "sha256": "ae464246bc6c7615dfbf6ccc9fdbe11b6b97311e4fc3654a9b76ceae9124af1a",
-      "bytes": 171184
+      "bytes": 171184,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "brand/quantum-twins-black.png",
@@ -1348,7 +1349,8 @@
     {
       "path": "fonts/FONT-NOTICES.txt",
       "sha256": "31c08f53782130ab0ba267af8c62b949683a4d80681aab2b1593f80475130b70",
-      "bytes": 584
+      "bytes": 584,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "fonts/Poppins-OFL.txt",
@@ -1371,26 +1373,30 @@
     {
       "path": "fonts/poppins-medium.woff2",
       "sha256": "4e6bcd8451cfb3d3aee06de8ddb210c86ca085a09c2ec2e051662d497c598b43",
-      "bytes": 5856
+      "bytes": 5856,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "fonts/poppins-regular.woff2",
       "sha256": "2b03078aae0dea8fecd797eacc614515ada8018d6c1f05f0d73c2d8351668515",
-      "bytes": 5980
+      "bytes": 5980,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "fonts/smiley-display.woff2",
       "sha256": "11e9b567fe8c3011bd4caf2f1721a70e5d5fa68d4f96417166a04aa57f8fb16f",
-      "bytes": 98808
+      "bytes": 98808,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "fonts/source-han-interface.woff2",
       "sha256": "ea6f0b6de0435439106cfea47126e3f33629c5ecfb312d5a97456336c04a93e8",
-      "bytes": 167916
+      "bytes": 167916,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "index.html",
-      "sha256": "ee8c4f660a5af9e90b76f9f196e67914672d21eca4a452c26696ff2cf2c582f3",
+      "sha256": "40795748c32170efc39d735ce59b225e6f23646a1308a4526e6be5777fe5b1b3",
       "bytes": 903
     },
     {
@@ -1444,37 +1450,44 @@
     {
       "path": "team/tang-wenhui.webp",
       "sha256": "189afea8f9f5e2a29084ca33936b0075f14334cd3ecad63f8502e4f62a98a078",
-      "bytes": 108892
+      "bytes": 108892,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "team/tian-chao.webp",
       "sha256": "ec7e2fe177e6216f29221af4ae99c5b77ed703bb66bc15299216669c73833547",
-      "bytes": 94618
+      "bytes": 94618,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "team/wang-chao.webp",
       "sha256": "0cb07355efc3ee9adc9831e7236a812bdda8bcc6f22b3e63bff8e6f12cbaa3e4",
-      "bytes": 53494
+      "bytes": 53494,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "team/yang-yuanyuan.webp",
       "sha256": "f2e56a807ea7c8a79bbfae7b0ff86eaa6966e6c5914b71d4cd15e2bc85005551",
-      "bytes": 118926
+      "bytes": 118926,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "team/zhang-zhibo.webp",
       "sha256": "44fa01f633369c6a643b4e79b7e7c26af735db67c93133710cc24c2237e31ec8",
-      "bytes": 120758
+      "bytes": 120758,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "workflow/scene-01.webp",
       "sha256": "a559633fbabb4fd4a26355e718975d1eefa92e118fba543c532f7e4bd1398297",
-      "bytes": 341484
+      "bytes": 341484,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "workflow/scene-02.webp",
       "sha256": "f77edf39a0cb79e062351d2c00893da46cfcc7942eb8fa6bb66e826c125af8c2",
-      "bytes": 367242
+      "bytes": 367242,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     }
   ]
 }
