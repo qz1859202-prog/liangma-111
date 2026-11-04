@@ -12,7 +12,7 @@ def safe_path(value):
  return value
 
 raw=Path('site-manifest.json').read_bytes()
-assert sha(raw)=='45efb78e93c4fdf54c8b21c2a0482d0818745b9af6d27db3454dce4fff67b243', 'Manifest does not match this release'
+assert sha(raw)=='e7b36383d18e90f75a9730fab3f072e8f96bf354365ae160c25c17bf174c52e7', 'Manifest does not match this release'
 manifest=json.loads(raw)
 archive=Path('site-code.zip')
 assert sha(archive.read_bytes())==manifest['code_sha256'], 'Code archive mismatch'
@@ -87,16 +87,7 @@ def preserve_media(pair):
    if attempt==4:raise
    time.sleep(2**attempt)
 with ThreadPoolExecutor(max_workers=4) as pool:
- for name,spec in pool.map(preserve_media,[(film,variant) for film in films for variant in ['playback.mp4','mobile.mp4','preview.mp4']]):media_checksums[name]=spec
-assert len(media_checksums)==30
-import subprocess,shutil
-if not shutil.which('ffmpeg'):
- subprocess.run(['sudo','apt-get','update','-qq'],check=True)
- subprocess.run(['sudo','apt-get','install','-y','-qq','ffmpeg'],check=True)
-for film in films:
- print('Preparing smooth rendition: '+film.parent.name,flush=True)
- subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-i',str(film.parent/'mobile.mp4'),'-vf',"scale=w='min(640,iw)':h='min(360,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','29','-maxrate','400k','-bufsize','800k','-profile:v','main','-pix_fmt','yuv420p','-c:a','aac','-b:a','64k','-movflags','+faststart',str(film.parent/'smooth.mp4')],check=True)
- target=film.parent/'smooth.mp4';data=target.read_bytes();assert len(data)>1000 and data.index(b'moov')<data.index(b'mdat');media_checksums[target.relative_to(root).as_posix()]={'bytes':len(data),'sha256':sha(data)}
+ for name,spec in pool.map(preserve_media,[(film,variant) for film in films for variant in ['playback.mp4','mobile.mp4','preview.mp4','smooth.mp4']]):media_checksums[name]=spec
 assert len(media_checksums)==40
 
 (root/'media-checksums.json').write_text(json.dumps(media_checksums,indent=2))

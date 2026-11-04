@@ -1,8 +1,8 @@
 {
-  "version": "zhang-wechat-20261104",
+  "version": "covers-controls-20261104",
   "edition": "111",
   "repository": "liangma-111",
-  "code_sha256": "a6812526e469a4495482540c907a1e2852970764cad2581e959ae39f2891916d",
+  "code_sha256": "7306f7ed2aedcd4064f0aef9e3137cdabf7f2dd755144339b4e46aef317d5221",
   "files": [
     {
       "path": ".nojekyll",
@@ -16,14 +16,14 @@
       "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
-      "path": "assets/index-B5THUseo.css",
-      "sha256": "c717b20e27e99dbc6faacb74e047cfa477533906cae42503b599111ad6257b7a",
-      "bytes": 172037
+      "path": "assets/index-BhqV3wJW.js",
+      "sha256": "c6dfbf2420544cbe804706466402024076427c00a0ac99e2673931ccb20d75ea",
+      "bytes": 523969
     },
     {
-      "path": "assets/index-Cd204DxA.js",
-      "sha256": "e17f6f3a719cc269c00c86a2e5438c10a453f540c6779c9521e348b841a76816",
-      "bytes": 513147
+      "path": "assets/index-CfkW-lsF.css",
+      "sha256": "44399f531f5bec442971d57185b04cc7eb5826ec20a98afb9634f92b64bb425d",
+      "bytes": 172524
     },
     {
       "path": "brand/quantum-twins-black.png",
@@ -1384,16 +1384,18 @@
     {
       "path": "fonts/smiley-display.woff2",
       "sha256": "d696e8be6d5f04cf374ed2802c1c7a2d998f92515dbd817d3318f5bbe1ba876b",
-      "bytes": 99816
+      "bytes": 99816,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "fonts/source-han-interface.woff2",
       "sha256": "caabc42a13c35d597131f8e55dcdda7db9115e9356edd7b61fff669985f3d9c7",
-      "bytes": 170132
+      "bytes": 170132,
+      "origin": "https://qz1859202-prog.github.io/liangma-111"
     },
     {
       "path": "index.html",
-      "sha256": "df210486cf8a85f81d24e4d7305a10485220180210d95551d557cbbde102975d",
+      "sha256": "5bd6c2f06644663c8c917fe4c3b27d2ec101e4b241aae20120520c8c9032af1d",
       "bytes": 903
     },
     {
