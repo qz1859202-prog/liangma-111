@@ -12,7 +12,7 @@ def safe_path(value):
  return value
 
 raw=Path('site-manifest.json').read_bytes()
-assert sha(raw)=='179b44e76691907d66ff19ce3f632282c4247423d1343b6e41af9a6d6b1d903f', 'Manifest does not match this release'
+assert sha(raw)=='45efb78e93c4fdf54c8b21c2a0482d0818745b9af6d27db3454dce4fff67b243', 'Manifest does not match this release'
 manifest=json.loads(raw)
 archive=Path('site-code.zip')
 assert sha(archive.read_bytes())==manifest['code_sha256'], 'Code archive mismatch'
@@ -67,17 +67,37 @@ for film in films:
    assert (film.parent/relative).is_file(), 'Missing HLS segment: '+relative
 assert len([i for i in expected if i.startswith('films/')])==217
 assert (root/'index.html').is_file()
-# Generate universally playable H.264/AAC MP4, with metadata at the front for mobile startup.
+# Preserve the already deployed media renditions. This release changes text and playback intent only.
+media_checksums={}
+def preserve_media(pair):
+ film,variant=pair
+ relative=film.parent.relative_to(root)/variant
+ origin='https://qz1859202-prog.github.io/liangma-'+manifest['edition']
+ url=origin+'/'+quote(relative.as_posix(),safe='/')
+ for attempt in range(5):
+  try:
+   with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Liangma-Media-Preserve/1.0'}),timeout=90) as response:
+    data=response.read()
+    expected_length=response.headers.get('Content-Length')
+   assert len(data)>1000 and b'ftyp' in data[:32], 'Invalid MP4 rendition'
+   if expected_length:assert len(data)==int(expected_length), 'Incomplete media download'
+   target=root/relative;target.write_bytes(data)
+   return relative.as_posix(),{'bytes':len(data),'sha256':sha(data)}
+  except Exception:
+   if attempt==4:raise
+   time.sleep(2**attempt)
+with ThreadPoolExecutor(max_workers=4) as pool:
+ for name,spec in pool.map(preserve_media,[(film,variant) for film in films for variant in ['playback.mp4','mobile.mp4','preview.mp4']]):media_checksums[name]=spec
+assert len(media_checksums)==30
 import subprocess,shutil
 if not shutil.which('ffmpeg'):
  subprocess.run(['sudo','apt-get','update','-qq'],check=True)
  subprocess.run(['sudo','apt-get','install','-y','-qq','ffmpeg'],check=True)
 for film in films:
- subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-i',str(film),'-map','0:v:0','-map','0:a:0?','-vf',"scale=w='min(1280,iw)':h='min(720,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','23','-profile:v','main','-level:v','4.0','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-movflags','+faststart',str(film.parent/'playback.mp4')],check=True)
- assert (film.parent/'playback.mp4').stat().st_size>1000
- print('Encoding mobile and preview: '+film.parent.name,flush=True)
- common=['ffmpeg','-nostdin','-v','error','-y','-i',str(film.parent/'playback.mp4')]
- subprocess.run(common+['-vf',"scale=w='min(854,iw)':h='min(480,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','27','-maxrate','850k','-bufsize','1700k','-profile:v','main','-pix_fmt','yuv420p','-c:a','aac','-b:a','80k','-movflags','+faststart',str(film.parent/'mobile.mp4')],check=True)
- subprocess.run(common+['-t','6','-an','-vf',"scale=w='min(640,iw)':h='min(360,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2,fps=20",'-c:v','libx264','-preset','veryfast','-crf','29','-maxrate','400k','-bufsize','800k','-pix_fmt','yuv420p','-movflags','+faststart',str(film.parent/'preview.mp4')],check=True)
+ print('Preparing smooth rendition: '+film.parent.name,flush=True)
+ subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-i',str(film.parent/'mobile.mp4'),'-vf',"scale=w='min(640,iw)':h='min(360,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','29','-maxrate','400k','-bufsize','800k','-profile:v','main','-pix_fmt','yuv420p','-c:a','aac','-b:a','64k','-movflags','+faststart',str(film.parent/'smooth.mp4')],check=True)
+ target=film.parent/'smooth.mp4';data=target.read_bytes();assert len(data)>1000 and data.index(b'moov')<data.index(b'mdat');media_checksums[target.relative_to(root).as_posix()]={'bytes':len(data),'sha256':sha(data)}
+assert len(media_checksums)==40
 
+(root/'media-checksums.json').write_text(json.dumps(media_checksums,indent=2))
 print('Verified '+manifest['edition']+' portfolio: '+str(len(expected))+' assets, 10 complete films, independent public Pages deployment.')
