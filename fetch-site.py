@@ -12,7 +12,7 @@ def safe_path(value):
  return value
 
 raw=Path('site-manifest.json').read_bytes()
-assert sha(raw)=='634a39e198212208b3afee49b5ece5e5ae3ae5a76a8106e5b9ca52e677fda80c', 'Manifest does not match this release'
+assert sha(raw)=='ab3fb42954734e6c0a9674b8f794dd31ada9f08292b91f2321dde76e1363463e', 'Manifest does not match this release'
 manifest=json.loads(raw)
 archive=Path('site-code.zip')
 assert sha(archive.read_bytes())==manifest['code_sha256'], 'Code archive mismatch'
@@ -89,17 +89,8 @@ def preserve_media(pair):
 with ThreadPoolExecutor(max_workers=4) as pool:
  for name,spec in pool.map(preserve_media,[(film,variant) for film in films for variant in ['playback.mp4','mobile.mp4','preview.mp4','smooth.mp4']]):media_checksums[name]=spec
 assert len(media_checksums)==40
-# HD previews retain the existing 720p video stream, without an audio track.
-import shutil,subprocess
-if not shutil.which('ffmpeg'):
- subprocess.run(['sudo','apt-get','update','-qq'],check=True)
- subprocess.run(['sudo','apt-get','install','-y','-qq','ffmpeg'],check=True)
-for film in films:
- target=film.parent/'preview-hd.mp4'
- subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-i',str(film.parent/'playback.mp4'),'-t','6','-map','0:v:0','-an','-c:v','copy','-movflags','+faststart',str(target)],check=True)
- data=target.read_bytes()
- assert len(data)>1000 and data.index(b'moov')<data.index(b'mdat')
- media_checksums[target.relative_to(root).as_posix()]={'bytes':len(data),'sha256':sha(data)}
+with ThreadPoolExecutor(max_workers=4) as pool:
+ for name,spec in pool.map(preserve_media,[(film,'preview-hd.mp4') for film in films]):media_checksums[name]=spec
 assert len(media_checksums)==50
 
 (root/'media-checksums.json').write_text(json.dumps(media_checksums,indent=2))
