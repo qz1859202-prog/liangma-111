@@ -12,7 +12,7 @@ def safe_path(value):
  return value
 
 raw=Path('site-manifest.json').read_bytes()
-assert sha(raw)=='491770c2d4af5cca19a3be07a727bdb3484f0fa6fed98c5e3c106ab53486f009', 'Manifest does not match this release'
+assert sha(raw)=='179b44e76691907d66ff19ce3f632282c4247423d1343b6e41af9a6d6b1d903f', 'Manifest does not match this release'
 manifest=json.loads(raw)
 archive=Path('site-code.zip')
 assert sha(archive.read_bytes())==manifest['code_sha256'], 'Code archive mismatch'
@@ -75,4 +75,9 @@ if not shutil.which('ffmpeg'):
 for film in films:
  subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-i',str(film),'-map','0:v:0','-map','0:a:0?','-vf',"scale=w='min(1280,iw)':h='min(720,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','23','-profile:v','main','-level:v','4.0','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-movflags','+faststart',str(film.parent/'playback.mp4')],check=True)
  assert (film.parent/'playback.mp4').stat().st_size>1000
+ print('Encoding mobile and preview: '+film.parent.name,flush=True)
+ common=['ffmpeg','-nostdin','-v','error','-y','-i',str(film.parent/'playback.mp4')]
+ subprocess.run(common+['-vf',"scale=w='min(854,iw)':h='min(480,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-preset','veryfast','-crf','27','-maxrate','850k','-bufsize','1700k','-profile:v','main','-pix_fmt','yuv420p','-c:a','aac','-b:a','80k','-movflags','+faststart',str(film.parent/'mobile.mp4')],check=True)
+ subprocess.run(common+['-t','6','-an','-vf',"scale=w='min(640,iw)':h='min(360,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2,fps=20",'-c:v','libx264','-preset','veryfast','-crf','29','-maxrate','400k','-bufsize','800k','-pix_fmt','yuv420p','-movflags','+faststart',str(film.parent/'preview.mp4')],check=True)
+
 print('Verified '+manifest['edition']+' portfolio: '+str(len(expected))+' assets, 10 complete films, independent public Pages deployment.')
