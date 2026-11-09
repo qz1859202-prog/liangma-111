@@ -95,3 +95,10 @@ assert len(media_checksums)==50
 
 (root/'media-checksums.json').write_text(json.dumps(media_checksums,indent=2))
 print('Verified '+manifest['edition']+' portfolio: '+str(len(expected))+' assets, 10 complete films, independent public Pages deployment.')
+
+# Publish the isolated CodaPan trial alongside the verified existing portfolio.
+trial=Path('codapan-test-20261109/index.html')
+if trial.is_file():
+ target=root/'codapan-test-20261109/index.html'
+ target.parent.mkdir(parents=True,exist_ok=True)
+ target.write_bytes(trial.read_bytes())
