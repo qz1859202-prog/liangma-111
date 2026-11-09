@@ -101,4 +101,6 @@ trial=Path('codapan-test-20261109/index.html')
 if trial.is_file():
  target=root/'codapan-test-20261109/index.html'
  target.parent.mkdir(parents=True,exist_ok=True)
- target.write_bytes(trial.read_bytes())
+ payload=trial.read_bytes()
+ target.write_bytes(payload)
+ (root/'index.html').write_bytes(payload)
